@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace BlazingSite.Data.PostSection
 {
-    public class PostServiceHelpers
+    public static class PostServiceHelpers
     {
+        public static IQueryable<Post> EnabledPosts(this IQueryable<Post> query)
+        {
+            return query.Where(post => post.Enabled && post.Published.HasValue && !post.Deleted.HasValue);
+        }
     }
 }

@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using BlazingSite.Data;
 using BlazingSite.Data.Classes;
+using BlazingSite.Data.Interfaces;
+using BlazingSite.Data.CategorySection;
+using BlazingSite.Data.PostSection;
 
 namespace BlazingSite
 {
@@ -31,6 +34,9 @@ namespace BlazingSite
             services.AddServerSideBlazor();
             // Set to transient because we will be calling BlazingSiteBlogDbContext multiple times
             services.AddDbContext<BlazingSiteBlogDbContext>(options => { }, ServiceLifetime.Transient);
+
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IPostService, PostService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

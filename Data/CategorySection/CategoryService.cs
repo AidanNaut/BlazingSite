@@ -18,9 +18,9 @@ namespace BlazingSite.Data.CategorySection
         {
             _context = context;
         }
-        public Task<IEnumerable<Category>> GetAllAsync()
+        public virtual async Task<IEnumerable<Category>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<Category>().EnabledCategories().ToListAsync();
         }
 
         public virtual async Task<Category> GetAsync(int id)
