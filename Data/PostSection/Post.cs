@@ -12,5 +12,6 @@ namespace BlazingSite.Data.PostSection
         public virtual string Content { get; set; }
         public virtual bool Enabled { get; set; }
         public virtual DateTimeOffset? Published { get; set; }
+        public virtual ICollection<PostCategory> PostsCategories { get; set; }
 	}
 }

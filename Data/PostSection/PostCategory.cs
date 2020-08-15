@@ -23,7 +23,7 @@ namespace BlazingSite.Data.PostSection
 
             builder.Entity<PostCategory>()
                 .HasOne(postCategory => postCategory.Post)
-                .WithMany()
+                .WithMany(post => post.PostsCategories)
                 .HasPrincipalKey(post => post.Id)
                 .HasForeignKey(postCategory => postCategory.PostId);
         }
