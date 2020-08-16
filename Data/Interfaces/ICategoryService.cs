@@ -9,7 +9,6 @@ namespace BlazingSite.Data.Interfaces
     public partial interface ICategoryService
     {
         Task<Category> GetAsync(int id);
-
         Task<IEnumerable<Category>> GetAllAsync();
     }
 }

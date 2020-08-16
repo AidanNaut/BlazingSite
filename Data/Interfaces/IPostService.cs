@@ -9,7 +9,6 @@ namespace BlazingSite.Data.Interfaces
     public partial interface IPostService
     {
         Task<Post> GetAsync(int id);
-
         Task<IEnumerable<Post>> GetAllAsync(int? categoryID = null);
     }
 }

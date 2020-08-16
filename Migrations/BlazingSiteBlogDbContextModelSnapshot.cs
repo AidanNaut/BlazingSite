@@ -119,7 +119,7 @@ namespace BlazingSite.Migrations
                         .IsRequired();
 
                     b.HasOne("BlazingSite.Data.PostSection.Post", "Post")
-                        .WithMany()
+                        .WithMany("PostsCategories")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

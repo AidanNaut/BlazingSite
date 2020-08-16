@@ -20,12 +20,16 @@ namespace BlazingSite.Data.CategorySection
         }
         public virtual async Task<IEnumerable<Category>> GetAllAsync()
         {
-            return await _context.Set<Category>().EnabledCategories().ToListAsync();
+            return await _context.Set<Category>()
+                .EnabledCategories()
+                .ToListAsync();
         }
 
         public virtual async Task<Category> GetAsync(int id)
         {
-            return await _context.Set<Category>().EnabledCategories().FirstOrDefaultAsync(post => post.Id == id);
+            return await _context.Set<Category>()
+                .EnabledCategories()
+                .FirstOrDefaultAsync(post => post.Id == id);
         }
     }
 }

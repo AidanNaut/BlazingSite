@@ -11,6 +11,5 @@ namespace BlazingSite.Data.Interfaces
         DateTimeOffset Created { get; set; }
         DateTimeOffset? LastUpdated { get; set; }
         DateTimeOffset? Deleted { get; set; }
-        
     }
 }

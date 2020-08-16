@@ -1,0 +1,41 @@
+﻿@page "/"
+@page "/category/{id:int}"
+@using BlazingSite.Data.Interfaces
+@using BlazingSite.Data.PostSection
+@using BlazingSite.Data.CategorySection
+@inject ICategoryService categoryService
+@inject IPostService postService
+
+@if (Category != null)
+{
+    <h3>@Category.Name</h3>
+}
+
+@if (Posts != null)
+{
+    @foreach (var post in Posts)
+    {
+        <div>
+            <h3><a href="/post/@post.Id">@post.Title</a></h3>
+            <p>@post.Published?.ToString("dddd d MMMM yyyy")</p>
+            <p>@post.Content.Substring(0, 100)</p>
+        </div>
+    }
+}
+
+@code {
+    [Parameter]
+    public virtual int? Id { get; set; }
+    public virtual Category Category { get; set; }
+    public virtual IEnumerable<Post> Posts { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id.HasValue)
+            Category = await categoryService.GetAsync(Id.Value);
+
+        Posts = await postService.GetAllAsync(Id);
+
+        await base.OnParametersSetAsync();
+    }
+}
