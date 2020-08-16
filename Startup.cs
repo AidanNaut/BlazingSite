@@ -14,6 +14,7 @@ using BlazingSite.Data.Classes;
 using BlazingSite.Data.Interfaces;
 using BlazingSite.Data.CategorySection;
 using BlazingSite.Data.PostSection;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazingSite
 {
@@ -33,7 +34,7 @@ namespace BlazingSite
             services.AddRazorPages();
             services.AddServerSideBlazor();
             // Set to transient because we will be calling BlazingSiteBlogDbContext multiple times
-            services.AddDbContext<BlazingSiteBlogDbContext>(options => { }, ServiceLifetime.Transient);
+            services.AddDbContext<BlazingSiteBlogDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")), ServiceLifetime.Transient);
 
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IPostService, PostService>();
