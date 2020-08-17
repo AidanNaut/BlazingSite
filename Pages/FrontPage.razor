@@ -1,5 +1,22 @@
-﻿<h3>FrontPage</h3>
+﻿@page "/"
+@using BlazingSite.Data.Interfaces
+@using BlazingSite.Data.PostSection
+@using BlazingSite.Data.CategorySection
+@inject ICategoryService categoryService
+@inject IPostService postService
+
+<h3>FrontPage</h3>
 
 @code {
+    [Parameter]
+    public virtual int? Id { get; set; }
+    public virtual Post Post { get; set; }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id.HasValue)
+            Post = await postService.GetAsync(Id.Value);
+
+        await base.OnParametersSetAsync();
+    }
 }
