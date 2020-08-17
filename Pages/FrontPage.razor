@@ -2,20 +2,31 @@
 @using BlazingSite.Data.Interfaces
 @using BlazingSite.Data.PostSection
 @using BlazingSite.Data.CategorySection
+@using System.Linq 
 @inject ICategoryService categoryService
 @inject IPostService postService
 
-<h3>FrontPage</h3>
+@if (Id != null)
+{
+    <div>
+        <PostPage Id="Id"></PostPage>
+    </div>
+}
+else
+{
+    <div>
+        <p>Latest post not found?</p>
+    </div>
+}
+
 
 @code {
     [Parameter]
     public virtual int? Id { get; set; }
-    public virtual Post Post { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        if (Id.HasValue)
-            Post = await postService.GetAsync(Id.Value);
+        Id = await postService.GetLastAsync();
 
         await base.OnParametersSetAsync();
     }

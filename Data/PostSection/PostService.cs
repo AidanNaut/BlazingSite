@@ -47,5 +47,10 @@ namespace BlazingSite.Data.PostSection
                 .EnabledPosts()
                 .FirstOrDefaultAsync(post => post.Id == id);
         }
+
+        public virtual async Task<int?> GetLastAsync()
+        {
+            return await _context.Set<Post>().MaxAsync(post => post.Id);
+        }
     }
 }

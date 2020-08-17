@@ -10,5 +10,6 @@ namespace BlazingSite.Data.Interfaces
     {
         Task<Post> GetAsync(int id);
         Task<IEnumerable<Post>> GetAllAsync(int? categoryID = null);
+        Task<int?> GetLastAsync();
     }
 }
